@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test grid</title>
+        <style>
+            table {
+                border: 1px solid grey;
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+
+            td {
+                border: 1px solid grey;
+                padding: .5em;
+            }
+
+        </style>
+    </head>
+    <body>
+        <table id="game-board">
+         </table>
+
+        <script>
+            class SnakeGame {
+                constructor(nCols, nRows) {
+                    this.cells = [];
+
+                    const gameBoard = document.querySelector("#game-board");
+                    for (let y=0; y<nRows; y++) {
+                        const row = gameBoard.insertRow();
+                        this.cells.push([]);
+
+                        for (let x = 0; x <nCols; x++) {
+                            const cell = row.insertCell();
+                            cell.innerHTML = 'x';
+                            this.showCell(cell, false);
+                            this.cells.at(-1).push(cell);
+                        }
+                    }
+
+                    this.nCols = nCols;
+                    this.nRows = nRows;
+
+                    // this.snake = [{x: 0, y: 0}];
+                    console.log(this.cells);
+
+                    this.run();
+                }
+
+                showCell(cell, show = true) {
+                    if (!cell) {
+                        return;
+                    }
+
+                    cell.style.color = show ? 'black': 'transparent';
+                }
+
+                clear() {
+                    this.cells.forEach(row => {
+                        row.forEach(cell => this.showCell(cell, false));
+                    });
+                }
+
+                run() {
+                    this.snake = [[0, 0]];
+                    this.direction = [0, 1];
+                    this.showCell(this.cells[0][0], true);
+
+                    this.timer = setInterval(() => {
+                        // try to move the snake
+
+                        
+                    }, 1000);
+                }
+            }
+
+
+            new SnakeGame(8, 8);
+            
+                
+
+        </script>
+    </body>
+</html>

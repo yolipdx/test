@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            .test-size {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+            }
+
+            .scale {
+                transform: scale(0.5);
+            }
+
+            .test {
+                width: 100px;
+                height: 20px;
+                background-color: green;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="test"></div>
+        <div class="test-size">
+        </div>
+        <div class="test"></div>
+
+        <script>
+            const d1 = document.querySelector(".test-size");
+            console.log("offset: ", d1.offsetWidth, d1.offsetHeight);
+            const rect1 = d1.getBoundingClientRect();
+            console.log("bounding client rect: ", rect1);
+
+            console.log("\n add scale 0.5");
+            d1.classList.add("scale");
+            console.log("offset: ", d1.offsetWidth, d1.offsetHeight);
+            const rect2 = d1.getBoundingClientRect();
+            console.log("bounding client rect: ", rect2);
+        </script>
+    </body>
+</html>

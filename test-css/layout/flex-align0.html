@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Flexbox align 0 — starting code</title>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 70%;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+
+      button {
+        font-size: 18px;
+        line-height: 1.5;
+        width: 15%;
+      }
+
+      div {
+        height: 300px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+
+      /* Add your flexbox CSS below here */
+      .div-1 {
+        margin-top: 20px;
+
+        display: flex;
+        justify-content: space-around;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .div-1 > button {
+        flex: 1;
+      }
+
+      .div-1 > button + button {
+        margin-left: 20px;
+      }
+
+      .div-1 > button:nth-child(2) {
+        padding: 20px 40px;
+        align-self: flex-start;
+      }
+
+      .div-1 > button:nth-child(4) {
+        padding: 80px 10px;
+        background-color: gray;
+        align-self: baseline;
+      }
+
+      .div-1 > button:last-child {
+        padding: 80px 10px;
+        background-color: gray;
+        align-self: flex-end;
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <div class="div-0">
+      <button>Smile</button>
+      <button>Laugh</button>
+      <button>Wink</button>
+      <button>Shrug</button>
+      <button>Blush</button>
+    </div>
+    <div class="div-1">
+        <button>Smile</button>
+        <button>Laugh</button>
+        <button>Wink</button>
+        <button>Shrug</button>
+        <button>Blush</button>
+        
+      </div>
+  </body>
+</html>

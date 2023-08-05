@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>snake test</title>
+        <style>
+            #game-board {
+                max-width: 1024px;
+                margin: auto;
+                min-height: 100px;
+                border: 1px solid red;
+                padding: .5em;
+
+                display: flex;
+            }
+
+            #game-board table {
+                border-spacing: 0;
+                border: 1px dotted green;
+            }
+
+            #game-board table td {
+                width: 10px;
+                height: 10px;
+                color: transparent;
+                /* border: 1px solid orange; */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="game-board">
+            <table id="game-table"></table>
+            <div class="dash-board">
+                <button id="game-start">start game</button>
+            </div>
+        </div>
+
+        <script>
+
+            function randomInt(lo, hi) {
+                return lo + parseInt((hi + 1 - lo) * Math.random());
+            }
+
+            class SnakeGame {
+                constructor(w, h, cellSize) {
+                    this.w = w;
+                    this.h = h;
+                    this.cells = {};
+                    this.isRunning = false;
+
+                    this.snake = [];
+                    this.direction = [0, 1];
+
+                    this.createBoard(w, h);
+
+                    // set up event listener
+                    const startButton = document.querySelector("#game-start");
+                    console.log(startButton);
+                    startButton.addEventListener("click", () => {
+                        if (this.isRunning) {
+                            return;
+                        }
+
+                        this.start();
+                    });
+
+                    document.addEventListener("keydown", ({code}) => {
+                        if (!this.isRunning) {
+                            return;
+                        }
+
+                        [this.direction[0], this.direction[1]] = {
+                            'ArrowUp': [0, -1],
+                            'ArrowDown': [0, 1],
+                            'ArrowLeft': [-1, 0],
+                            'ArrowRight': [1, 0],
+                        }[code];
+                    });
+                }
+
+                createBoard(w, h) {
+                    const gameTable = document.querySelector("#game-table");
+                    for (let y = 0; y < h; y ++) {
+                        const row = gameTable.insertRow(y);
+                        for (let x = 0; x < w; x++) {
+                            const cell = row.insertCell(x);
+                            cell.innerHTML = 'o';
+                            this.cells[x + y * w] = cell;
+                        }
+                    }
+                }
+
+                getCell(x, y) {
+                    return this.cells[x + y * this.w];
+                }
+
+                hideCell({x, y}, isHide) {
+                    const cell = this.getCell(x, y);
+                    if (cell) {
+                        cell.style.color = isHide ?  'transparent' : 'black';
+                    }
+                }
+
+                isOutOfBoard(x, y) {
+                    return x < 0 || x > this.w - 1 || y < 0 || y > this.h - 1;
+                }
+
+                isEatable(cell) {
+                    return getComputedStyle(cell).color !== 'rgba(0, 0, 0, 0)';
+                }
+
+                clearBoard() {
+                    Object.values(this.cells).forEach(cell => cell.style.color = "transparent");
+                }
+
+                genFood() {
+                    // debugger;
+                    const inValidIds = new Set(this.snake.map(({x, y}) => x + this.w * y));
+
+                    let randId = -1;
+                    while (true) {
+                        randId = randomInt(0, this.w * this.h);
+                        if (!inValidIds.has(randId)) {
+                            console.log('randId: ', randId);
+                            break;
+                        }
+                    }
+
+                    let [x, y] = [randId % this.w, parseInt(randId / this.w)];
+                    console.log("rand: ", x, y);
+                    this.hideCell({x, y}, false);
+                }
+
+
+                eat(x, y) {
+                    this.snake.unshift({x, y});
+                }
+
+                nextPostion() {
+                    console.log("next p of: ");
+                    // debugger;
+                    return [this.snake[0].x + this.direction[0], this.snake[0].y + this.direction[1]];
+                }
+
+                moveTo(x, y) {
+                    const oldTail = this.snake.pop();
+                    this.snake.unshift({x, y});
+
+                    // clear tail and set head
+                    this.hideCell(oldTail, true);
+                    this.hideCell(this.snake[0], false);
+                }
+
+                start() {
+                    this.direction[0] = 0;
+                    this.direction[1] = 1;
+                    this.snake.length = 0;
+                    this.snake.push({x: 0, y:0});
+                    
+                    const snake = this.snake;
+                    this.hideCell(snake[0], false);
+                    this.isRunning = true;
+
+                    this.genFood();
+                    
+                    let timerId = setInterval(() => {
+                        const [nextX, nextY] = this.nextPostion();
+                        console.log('next cell: ', nextX, nextY);
+                        // game end ?
+                        if (this.isOutOfBoard(nextX, nextY)) {
+                            clearInterval(timerId);
+                            // window.alert("GAME OVER!");
+                            console.error("GAME OVER");
+                            debugger;
+                            this.isRunning = false;
+                            this.clearBoard();
+                            return;
+                        }
+
+                        const nextCell = this.getCell(nextX, nextY);
+                        if (this.isEatable(nextCell)) {
+                            this.eat(nextX, nextY);
+                            this.moveTo(...this.nextPostion());
+                            setTimeout(() => this.genFood(), 200);
+                        } else {
+                            this.moveTo(nextX, nextY);
+                        }
+
+                    }, 500);
+                }
+            }
+
+            new SnakeGame(10, 8, 14);
+        </script>
+    </body>
+</html>

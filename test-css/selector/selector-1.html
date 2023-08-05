@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            :root {
+                box-sizing: border-box;
+            }
+
+            /* *,
+            ::before,
+            ::after {
+                box-sizing: inherit;
+            } */
+
+            form {
+                border: 1px dotted red;
+                padding: 10px 20px;
+                /* box-sizing: content-box; */
+                box-sizing: border-box;
+            }
+
+            form input {
+                display: block;
+                /* box-sizing: content-box; */
+                width: 100%;
+            }
+
+            form input[type=text] {
+                background-color: gold;
+            }
+
+            form input[type="text"] {
+                background-color: beige;
+            }
+
+            .test-div {
+                background-color: green;
+                padding: 10px;
+                margin-top: 10px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <form action="">
+            <input type="text" placeholder="test input">
+            <div class="test-div">
+                aha
+            </div>
+        </form>
+    </body>
+</html>

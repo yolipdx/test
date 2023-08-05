@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<body>
+    <form action="" target="/" id="form">
+        <label for="age">
+            age:<input name="age" type="text">
+            <input type="submit" value="提交">
+        </label>
+    </form>
+
+    <script>
+        const form = document.querySelector("#form");
+        form.addEventListener("submit", (event) => {
+            console.log('submit', event);
+            const data = new FormData(event.target);
+            console.log(data);
+            // debugger;
+            console.log([...data]);
+
+            event.preventDefault();
+        });
+    </script>
+</body>

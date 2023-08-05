@@ -1,0 +1,247 @@
+<!-- use a list [] to store sankes info [{x, y, node}]
+
+move:
+ change tail x, y, and update node
+ eat: add the food into snake -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>my snake game</title>
+
+        <style>
+            :root {
+                box-sizing: border-box;
+            }
+
+            *,
+            ::before,
+            ::after {
+                box-sizing: inherit;
+            }
+
+            #snake-game {
+                display: flex;
+                padding: 1em;
+                border: 1px solid grey;
+            }
+
+            #game-board {
+                position: relative;
+                border: 1px dotted red;
+            }
+
+            #status-board {
+                margin-left: 2em;
+
+                padding: 1em;
+                min-height: 10px;
+
+            }
+
+            .node {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+            }
+
+            .node-food {
+                background-color: green;
+            }
+
+            .node-snake {
+                background-color: yellowgreen;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="snake-game">
+            <div id="game-board">
+            </div>
+
+            <div id="status-board">
+                <div id="score"></div>
+            </div>
+        </div>
+
+
+        <script>
+            class SnakeGame {
+                constructor(height, width, cellSize=20) {
+                    // set up board
+                    const gameBoard = document.querySelector("#game-board");
+                    gameBoard.style.width = `${width * cellSize}px`;
+                    gameBoard.style.height = `${height * cellSize}px`;
+
+                    this.gameBoard = gameBoard;
+                    this.height = height;
+                    this.width = width;
+                    this.cellSize = cellSize;
+                    
+                    this.snake = [{x: 0, y: 0, node: this.createNode(0, 0, false)}];
+                    this.direction = "ArrowDown"
+                    this.foodNode = {x: 0, y: 3, node: this.createNode(0, 3, true)};
+
+                    this.score = 0;
+
+                    document.addEventListener("keydown", (e) => this.onChageDirection(e));
+
+                    this.scoreElement = document.querySelector('div#score');
+                    this.start();
+
+                    // debugger;
+                    // this.genFood();
+                }
+
+                start() {
+                    let timerId = setInterval(() => {
+                        const [nextX, nextY] = this.next(this.snake[0]);
+
+                        // end ?
+                        if (this.isGameEnd(nextX, nextY)) {
+                            alert("game end");
+
+                            // clear
+                            clearInterval(timerId);
+                            timerId = null;
+                            return;
+                        }
+
+                        // move
+                        if (this.isFood(nextX, nextY)) {
+                            this.eatFood();
+
+                            this.score += 1;
+                            this.updateScore(this.score);
+
+                            // update score
+                            this.genFood();
+                        }
+                        
+
+                        const [nextMoveX, nextMoveY] = this.next(this.snake[0]);
+
+                        const tail = this.snake.pop();
+                        this.snake.unshift(tail);
+                        [this.snake[0].x, this.snake[0].y] = [nextMoveX, nextMoveY];
+
+                        console.log("nextMoveX, nextMoveY: ", nextMoveX, nextMoveY);
+                        this.moveTo(this.snake[0], [nextMoveX, nextMoveY]);
+
+                    }, 500);
+                }
+
+                updateScore(score) {
+                    // debugger;
+                    this.scoreElement.textContent = score;
+                }
+
+                eatFood() {
+                    this.snake.unshift(this.foodNode);
+                    // debugger;
+                    this.foodNode.node.classList.remove("node-food");
+                    this.foodNode.node.classList.add("node-snake");
+
+                    this.foodNode = null;
+                    console.log('eat');
+                    // debugger;
+                }
+
+                genFood() {
+                    const invalidCells = new Set(this.snake.map(({x, y}) => x + y * this.width));
+                    let randomIndex = -1;
+                    while (true) {
+                        randomIndex = Math.floor(Math.random() * this.height * this.width);
+                        if (!invalidCells.has(randomIndex)) {
+                            break;
+                        }
+                    }
+                    
+                    setTimeout(() => {
+                        const [x, y] = [randomIndex % this.width, Math.floor(randomIndex / this.width)];
+                        this.foodNode = {
+                            x,
+                            y,
+                            node: this.createNode(x, y, true),
+                        }
+                    }, 200);
+                }
+
+                isFood(x, y) {
+                    return this.foodNode && x === this.foodNode.x && y === this.foodNode.y;
+                }
+
+                isGameEnd(x, y) {
+                    if (x < 0 || x > this.width - 1 || y < 0 || y > this.height - 1) {
+                        return true;
+                    }
+
+                    // hit the snake ?
+                    if (this.foodNode) {
+                        for (let node of this.snake) {
+                            if (x === node.x && y === node.y) {
+                                return true;
+                            }
+                        }
+                    }
+                    
+                    return false;
+                }
+
+                next({x, y}) {
+                    switch (this.direction) {
+                        case "ArrowDown": {
+                            return [x, y + 1];
+                        }
+                        case "ArrowUp": {
+                            return [x, y - 1];
+                        }
+                        case "ArrowLeft": {
+                            return [x - 1, y];
+                        }
+                        case "ArrowRight": {
+                            return [x + 1, y];
+                        }
+                    }
+                }
+
+                createNode(x, y, isFood = false) {
+                    const nodeClass = isFood ? 'node node-food': 'node node-snake';
+                    const node = document.createElement("div");
+
+                    node.style.left = `${x * this.cellSize}px`;
+                    node.style.top = `${y * this.cellSize}px`;
+                    
+                    node.className = nodeClass;
+
+                    this.gameBoard.appendChild(node);
+                    return node;
+                }
+
+                moveTo(cell, [x, y]) {
+                    cell.x = x;
+                    cell.y = y;
+
+                    cell.node.style.top = `${y * this.cellSize}px`;
+                    cell.node.style.left = `${x * this.cellSize}px`;
+                }
+
+                onChageDirection({code:newDirection}) {
+                    const disabledMove = {
+                        "ArrowUp": "ArrowDown",
+                        "ArrowDown": "ArrowUp",
+                        "ArrowLeft": "ArrowRight",
+                        "ArrowRight": "ArrowLeft",
+                    };
+                    if (disabledMove[this.direction] !== newDirection) {
+                        this.direction = newDirection;
+                    }
+                }
+            }
+
+            new SnakeGame(10, 20);
+
+        </script>
+    </body>
+</html>

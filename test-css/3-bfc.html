@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .media {
+            padding: 1em 2em;
+            border: 1px dotted red;
+
+            max-width: 25vw;
+            display: inline-block;
+        }
+
+        .media__img {
+            float: left;
+
+            width: 5em;
+            height: 5em;
+        }
+
+        .media__content {
+            background-color: antiquewhite;
+        }
+
+        .media__content--BFC {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="media">
+        <h2>without BFC</h2>
+        <img src="https://www.hartz.com/wp-content/uploads/2022/04/small-dog-owners-1.jpg" alt="dog" class="media__img">
+        <div class="media__content">
+            Small dogs, just like big dogs, come with their own array of habits, issues, and quirks. It's not merely that sharp little bark you may have to worry about. While a dog is always a worthy financial and emotional investment, if you're looking into adopting a small dog, or maybe want a refresher on caring for your pint-sized pooch, keep these reminders close at hand.
+            Purebreds can be more susceptible to certain maladies. This is a general fact among all dogs, but small dogs, in particular, can suffer from the effects of purebred inbreeding and small gene pools. Illnesses and disabilities can range from blindness to cancer to premature hip dysplasia. Especially common in small breeds is Legg-Calvé-Perthes syndrome, a disease beginning in the hip bone that can lead to arthritis, hip collapse, or even death. But a small dog can also have advantages that a larger dog doesn't. For example, smaller dogs tend to be very alert, and eager to know what's going on around them. They're often friendly and personable and make great traveling companions, with a good leash. Make sure to have your small dog, from puppyhood to old age, regularly checked out by your vet.
+        </div>
+    </div>
+
+    <div class="media">
+        <h2>with BFC</h2>
+        <img src="https://www.hartz.com/wp-content/uploads/2022/04/small-dog-owners-1.jpg" alt="dog" class="media__img">
+        <div class="media__content media__content--BFC">
+            Small dogs, just like big dogs, come with their own array of habits, issues, and quirks. It's not merely that sharp little bark you may have to worry about. While a dog is always a worthy financial and emotional investment, if you're looking into adopting a small dog, or maybe want a refresher on caring for your pint-sized pooch, keep these reminders close at hand.
+            Purebreds can be more susceptible to certain maladies. This is a general fact among all dogs, but small dogs, in particular, can suffer from the effects of purebred inbreeding and small gene pools. Illnesses and disabilities can range from blindness to cancer to premature hip dysplasia. Especially common in small breeds is Legg-Calvé-Perthes syndrome, a disease beginning in the hip bone that can lead to arthritis, hip collapse, or even death. But a small dog can also have advantages that a larger dog doesn't. For example, smaller dogs tend to be very alert, and eager to know what's going on around them. They're often friendly and personable and make great traveling companions, with a good leash. Make sure to have your small dog, from puppyhood to old age, regularly checked out by your vet.
+        </div>
+    </div>
+</body>

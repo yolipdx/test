@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <style>
+            div {
+                width: 400px;
+                height: 5400px;
+                border: 1px dotted green;
+                background-color: lightblue;
+
+                margin-top: 100px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div id="test">
+
+        </div>
+
+        <script>
+            test.addEventListener("mousemove", (e) => {
+                // console.log("e: ", e);
+                console.log("offset: ", e.offsetX, e.offsetY);
+                console.log("page: ", e.pageX, e.pageY);
+                console.log("client: ", e.clientX, e.clientY);
+                console.log("\n");
+            });
+
+        </script>
+    </body>
+</html>

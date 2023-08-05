@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+
+    <style>
+        .drop-down {
+            position: relative;
+            display: inline-block;
+            /* display: none; */
+        }
+
+        .drop-down__label {
+            display: inline-block;
+            padding: .5em 1.5em;
+            border: 1px solid #cccc;
+            background-color: #eee;
+        }
+
+
+        .drop-down__menu {
+            border: 1px solid #eee;
+            position: absolute;
+            display: none;
+            
+            top: 2.1em;
+        }
+
+        .drop-down:hover .drop-down__menu {
+            display: block;
+        }        
+
+        .drop-down__menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border: 1px solid #999;
+        }
+
+        .drop-down__menu ul > li + li{
+            border-top: 1px solid red;
+        }
+
+        .drop-down__menu a {
+            display: block;
+            padding: 1em 2em;
+            text-decoration: none;
+        }
+
+        .drop-down__menu ul a:hover {
+            background-color: #fff;
+        }
+
+    </style>
+
+</head>
+<body>
+    <nav>
+        <div class="drop-down">
+            <div class="drop-down__label">
+                File
+            </div>
+            <div class="drop-down__menu">
+                <ul class="sub__menu">
+                    <li><a href="">Open</a></li>
+                    <li><a href="">Save as</a></li>
+                    <li><a href="">Close</a></li>
+                    <li><a href="">Duplicate</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</body>

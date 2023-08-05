@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .nav ul {
+            list-style-type: none;
+            padding: 1em 2em;
+            border: 1px solid red;
+
+            display: flex;
+        }
+
+        .nav a {
+            display: inline-block;
+            padding: .5em 1em;
+            background-color: lightblue;
+
+            text-decoration: none;
+        }
+
+        .nav li:nth-child(1n + 1) {
+            margin-left: 1em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href="">4</a></li>
+            <li><a href="">5</a></li>
+            <li><a href="">6</a></li>
+        </ul>
+    </nav>
+</body>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>snake game</title>
+
+        <style>
+            #game-board-container {
+                border: 1px dotted red;
+            }
+
+            .game-table {
+                /* background-color: #000; */
+                border-spacing: 1px;
+            }
+
+            .game-cell {
+                height: 1em;
+                width: 1em;
+                background-color: lightblue;
+            }
+        </style>
+    </header>
+    <body>
+        
+        <div id="game-board-container">
+
+        </div>
+
+        <script>
+
+            function setup_game(w, h, cell_size=14) {
+                const board_container = document.querySelector("#game-board-container");
+                const cellsHTML = [...'-'.repeat(h)].map(() => {
+                    const rowlCells = [...'-'.repeat(w)].map(() => '<td class="game-cell"></td>').join('');
+                    return `<tr class="game-row">${rowlCells}</tr>`;
+                }).join("");
+                
+                board_container.insertAdjacentHTML("beforeend", `<table class="game-table">${cellsHTML}</table>`);
+
+                const cells = document.querySelectorAll("#game-board-container td");
+                console.log(cells);
+
+                // fill_block(cells[11], 'red');
+                // for (let i = 0; i < 5; i++) {
+                //     const cell = get_cell(i, 3, w, cells);
+                //     fill_block(cell, 'red');
+                // }
+            }
+
+            function get_cell(x, y, w, cells) {
+                return cells[y * w + x];
+            }
+
+            function fill_block(cell, color) {
+                cell.style.backgroundColor = color;
+            }
+
+            function fill_random_empty_block() {
+
+            }
+
+            function create_snake(board, w, h, cell_size) {
+                
+            }
+
+            setup_game(20, 10, 14);
+        </script>
+    </body>
+</html>

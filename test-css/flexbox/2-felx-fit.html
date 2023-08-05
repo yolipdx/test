@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .container {
+            display: flex;
+            min-height: 50vh;
+        }
+
+        .container > div {
+            border: 1px solid red;
+        }
+
+        .container__fit {
+            flex: 2;
+            border: 1px solid red;
+            margin-left: 5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            this is something here
+        </div>
+        <div class="container__fit"></div>
+    </div>
+</body>
