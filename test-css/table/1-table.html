@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <style>
+            table, td, th {
+                border: 1px solid green;
+                border-collapse: collapse;
+            }
+
+            td,
+            th {
+                padding: 1em;
+            }
+
+            /* table {
+                border-spacing: 10px;
+            } */
+
+            .fixed {
+                table-layout: fixed;
+                /* table-layout: auto; will epand the table to cover all */
+                width: 50px;
+                height: 10px;
+            }
+
+            /* A table expands and contracts to accomodate the data contained inside it. */
+            table {
+                width: 100%;
+                height: 500px;
+                text-align: right;
+                vertical-align: top;
+            }
+
+            /* align */
+            th, td {
+                text-align: left;
+                vertical-align: bottom;
+            }
+
+        </style>
+    </head>
+    <body>
+        <table class="fixed">
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>M Li</td>
+                <td>100</td>
+            </tr>
+        </table>
+
+        <br><br>
+        <table>
+            <tr>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr>
+                <td>M Li</td>
+                <td>100</td>
+            </tr>
+        </table>
+    </body>
+</html>
