@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            .flex-container {
+                display: flex;
+                padding: .5em;
+                border: 1px solid green;
+            }
+
+            .flex-container > div {
+                padding: 1em;
+                background-color: #000;
+                color: #fff;
+            }
+
+            .flex-container > * + * {
+                margin-left: 1.5em;
+            }
+
+            .flex-container > div:nth-child(4) {
+                margin-left: auto;
+            }
+
+            /* .flex-container > div:nth-child(5) {
+                margin-left: auto;
+            }
+
+            .flex-container > div:nth-child(3) {
+                margin-left: auto;
+            } */
+        </style>
+
+    </head>
+    <body>
+        <div class="flex-container">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+        </div>
+    </body>
+</html>
