@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <style>
+            :root {
+                box-sizing: border-box;
+                font-size: calc(0.5em + 1vw);
+            }
+
+            *,
+            ::before,
+            ::after {
+                box-sizing: inherit;
+            }
+
+            body {
+                background-color: gray;
+            }
+
+            header {
+                border-radius: .5em;
+            }
+
+            h1 {
+                background-color: black;
+                color: white;
+            }
+
+            .container {
+                display: flex;
+            }
+
+            .main {
+                background-color: white;
+                border-radius: .5em;
+            }
+
+            .sidebar {
+                margin-left: 1em;
+                background-color: #fff;
+                padding: 1em;
+            }
+
+            .sidebar > * + * {
+                margin-top: 1.5em;
+            }
+
+            .button-link {
+                display: block;
+                padding: .5em 1em;
+                background-color: yellowgreen;
+                color: white;
+
+                text-decoration: none;
+                /* text-align: center; */
+                text-transform: uppercase;
+            }
+
+            .button-link + .button-link {
+                margin-top: 1.5em;
+            }
+
+            .sponsor-link {
+                display: block;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Frankin Running Club</h1>
+        </header>
+        <div class="container">
+            <main class="main">
+                <h2>Come join us!</h2>
+                <p>The Franking Running club meets at 6:00pm every Thursday at the town square.</p>
+            </main>
+            <aside class="sidebar">
+                <a href="/twitter" class="button-link">
+                    follow up on Twitter
+                </a>
+                <a href="/facebook" class="button-link">
+                    like us on Facebook
+                </a>
+                <a href="/sponsors" class="sponsor-link">
+                    become a sponsor
+                </a>
+            </aside>
+        </div>
+        
+    </body>
+</html>
