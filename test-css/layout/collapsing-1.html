@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <style>
+            :root {
+                box-sizing: border-box;
+                font-size: calc(0.5em + 1vw);
+            }
+
+            *,
+            ::before,
+            ::after {
+                box-sizing: inherit;
+            }
+
+            body {
+                background-color: gray;
+            }
+
+            header {
+                border-radius: .5em;
+            }
+
+            h1 {
+                background-color: black;
+                color: white;
+            }
+
+            main {
+                background-color: white;
+                border-radius: .5em;
+            }
+
+            .test-div {
+                display: flex;
+            }
+
+            .test-div > div {
+                border: 1px solid green;
+            }
+
+            .test-div > div + div {
+                margin-left: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test-div">
+            <div class="test-left">
+                <header>
+                    <h1>Frankin Running Club</h1>
+                </header>
+                <main>
+                    <h2>Come join us!</h2>
+                    <p>The Franking Running club meets at 6:00pm every Thursday at the town square.</p>
+                </main>
+            </div>
+            <div class="test-right">
+                <h1>Frankin Running Club</h1>
+                <h2>Come join us!</h2>
+                <p>The Franking Running club meets at 6:00pm every Thursday at the town square.</p>
+            </div>
+        </div>
+    </body>
+</html>
